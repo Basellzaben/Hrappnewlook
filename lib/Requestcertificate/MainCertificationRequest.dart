@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrmsapp/Index_Page/Index_Main.dart';
 import 'package:hrmsapp/vacation_request/body_vacation.dart';
 
 import '../homePage.dart';
@@ -14,6 +15,9 @@ class MainCertificationRequest extends StatefulWidget {
 }
 goBackToPreviousScreen(BuildContext context) {
   Navigator.pop(context);
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Index_Main()),);
 }
 
 class _MyAppState extends State<MainCertificationRequest> {

@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -22,8 +23,13 @@ import '../ProfilePage.dart';
 import '../WorkStatePage.dart';
 import '../homePage.dart';
 import '../main.dart';
+import 'Index_Main.dart';
 
 class Index_Body extends StatefulWidget {
+
+
+  static String idf="";
+
 /*  goBackToPreviousScreen(BuildContext context){
     // Navigator.pop(context);
     Navigator.push(
@@ -49,7 +55,13 @@ getuserdata()async{
 }
 
 Future<Personalinfo> getUser() async {
-  Uri apiUrl = Uri.parse(Globalvireable.personalinfoapi+Globalvireable.id);
+
+
+  SharedPreferences  prefer = await SharedPreferences.getInstance();
+
+   // Globalvireable.id= prefer.getString('LOGINU').toString();
+print("order "+Globalvireable.id);
+  Uri apiUrl = Uri.parse(Globalvireable.personalinfoapi+Index_Body.idf);
 
 
   http.Response response = await http.get(apiUrl);
@@ -63,18 +75,33 @@ Future<Personalinfo> getUser() async {
 
 }
 class _Index_Body extends State<Index_Body> {
-
+  @override
+  void initState() {
+/*   setState(() {
+     Navigator.push(
+         context,
+         MaterialPageRoute(
+             builder: (context) => Index_Main()));
+   });*/
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+
+   // Navigator.pop(context,true);
+
+
+
     goBackToPreviousScreen(BuildContext context) {
-      Navigator.pop(context);
+      Navigator.pop(context,true);
     }void logddout() async{
       SharedPreferences  prefer = await SharedPreferences.getInstance() ;
       prefer.setString('LOGIN',"0");
+      Globalvireable.id="0";
     }
     Future<bool> _onWillPop() async {
-
-      // This dialog will exit your app on saying yes
+    return false;
+/*      // This dialog will exit your app on saying yes
       return (await showDialog(
         context: context,
         builder: (context) => new AlertDialog(
@@ -87,10 +114,10 @@ class _Index_Body extends State<Index_Body> {
             ),
             new FlatButton(
              // onPressed: () =>Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: '', ))),
-              onPressed: (){/*Navigator.of(context).pop(true);
+              onPressed: (){*//*Navigator.of(context).pop(true);
 
               Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: '', )))
-              */
+              *//*
 
                 Navigator.pop(context);
                 Navigator.pop(context);
@@ -101,7 +128,7 @@ class _Index_Body extends State<Index_Body> {
             ),
           ],
         ),
-      )) ??
+      )) ??*/
           false;
     }
     Future<bool> _onWillPopLogout() async {
@@ -167,8 +194,12 @@ class _Index_Body extends State<Index_Body> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 var data = snapshot.data;
-                Globalvireable.name=data!.EmployeeDisplayName;
-                Globalvireable.email=data.Email;
+
+
+                Globalvireable.email=data!.Email;
+                Globalvireable.name=data.EmployeeDisplayName;
+
+
       return Container(
 
         child: Column(
@@ -291,7 +322,11 @@ class _Index_Body extends State<Index_Body> {
         ]),
       );
   } else {
-  return Center(child: CircularProgressIndicator());
+  return Center(child: CircularProgressIndicator(
+
+
+  ));
+
   }
 })))));
 
@@ -817,6 +852,8 @@ Widget horzintalScrolView(BuildContext context){
                    )),
      new GestureDetector(
                    onTap: () {
+                     Navigator.pop(context,true);
+
                      Navigator.push(
                        context,
                        MaterialPageRoute(builder: (context) => WorkStatePage()),

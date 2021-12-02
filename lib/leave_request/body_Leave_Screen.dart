@@ -44,7 +44,16 @@ class _body_LeaveScreen extends State<body_LeaveScreen> {
 
     getdate();
 
+    Future<bool> _onWillPop() async {
+      //Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Index_Main()),);
+      return false;
+
+    }
     return WillPopScope(
+      onWillPop: _onWillPop,
 
         child: Scaffold(
         appBar: AppBar(title: Text(
@@ -439,7 +448,7 @@ height: 100,
 
 ])
 
-             ))])))), onWillPop: onBackPressed(),);
+             ))])))),);
 
 
 
@@ -447,6 +456,11 @@ height: 100,
   onBackPressed()  {
 
       print('basseell');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Index_Main()),).whenComplete(() =>   Navigator.pop(context));
+
+      return true;
 
 
 

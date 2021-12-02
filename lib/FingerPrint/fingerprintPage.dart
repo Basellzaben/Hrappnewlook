@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:hrmsapp/FingerPrint/body.dart';
 import 'package:hrmsapp/FingerPrint/theme.dart';
+import 'package:hrmsapp/Index_Page/Index_Main.dart';
 import 'package:hrmsapp/models/my_theme_provider.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
@@ -22,6 +23,10 @@ class fingerprintPage extends StatelessWidget {
     Navigator.pop(context);
     debugShowCheckedModeBanner:false;
 
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Index_Main()),);
   }
 
   @override

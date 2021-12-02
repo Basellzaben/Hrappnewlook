@@ -4,6 +4,8 @@ import 'package:geolocator/geolocator.dart';
 import 'dart:math' show sin, cos, sqrt, atan2;
 import 'package:hrmsapp/FingerPrint/user_location.dart';
 import 'package:hrmsapp/GlobalVar/Globalvireables.dart';
+import 'package:hrmsapp/Index_Page/Index_Body.dart';
+import 'package:hrmsapp/Index_Page/Index_Main.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:vector_math/vector_math.dart';
 //import 'package:flutter/material.dart';
@@ -108,179 +110,189 @@ class _ExampleState extends State<Body> {
     debugShowCheckedModeBanner:false;
 
     getLocation();
-    return Scaffold (
-
-     //  body: SingleChildScrollView(
-     body: Center(
-
-         child: FutureBuilder<Location>  (
-          future: getLocation1(),
-          builder: (context, snapshot) {
-
-            if ( snapshot.hasData  /*|| _currentPosition==null || snapshot.error!=null
-            || snapshot.connectionState != ConnectionState.waiting*/){
-              var data = snapshot.data;
-
-              getDistance(double.parse(data!.LAT),double.parse(data.LANG));
-
-              distance = double.parse(data.Distination ) ;
-              return Container(
-                margin: EdgeInsets.all(20),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.only(top: 20.0,right: 0.0,left: 0.0),
+    Future<bool> _onWillPop() async {
+      //Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Index_Body()),).then((value) =>Navigator.pop(context));
 
 
-                          child: Consumer<MyThemeModel>
-                        (builder: (context, theme, child) =>
-                            GestureDetector
-                              (
-                              onTap: () =>
-                              theme.isLightTheme
-                                  ? Globalvireable.type2 = 1
-                                  : Globalvireable.type2 = 0,
+      return true;
+    }
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold (
+       //  body: SingleChildScrollView(
+       body: Center(
 
-                              /*  setState(() {
+           child: FutureBuilder<Location>  (
+            future: getLocation1(),
+            builder: (context, snapshot) {
 
-                          print("Globalvireable  "+Globalvireable.type2.toString());
-                          // _determinePosition();
-                        })*/ /*=!Globalvireable.type*/ /*
+              if ( snapshot.hasData  /*|| _currentPosition==null || snapshot.error!=null
+              || snapshot.connectionState != ConnectionState.waiting*/){
+                var data = snapshot.data;
+
+                getDistance(double.parse(data!.LAT),double.parse(data.LANG));
+
+                distance = double.parse(data.Distination ) ;
+                return Container(
+                  margin: EdgeInsets.all(20),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height,
+                    child: Column(
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.only(top: 20.0,right: 0.0,left: 0.0),
+
+                            child: Consumer<MyThemeModel>
+                          (builder: (context, theme, child) =>
+                              GestureDetector
+                                (onTap: () =>
+                                theme.isLightTheme
+                                    ? Globalvireable.type2 = 1
+                                    : Globalvireable.type2 = 0,
+
+
+                                /*  setState(() {
+
+                            print("Globalvireable  "+Globalvireable.type2.toString());
+                            // _determinePosition();
+                          })*/ /*=!Globalvireable.type*/ /*
 */ /*onchange()*/ /*,*/
-                              child: Text(
-                                  theme.isLightTheme ? "Check In" : "Check Out",
-                                /*  style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .bodyText1,*/
+                                child: Text(
+                                    theme.isLightTheme ? "Check In" : "Check Out",
+                                  /*  style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .bodyText1,*/
 
-                                  style: TextStyle(fontSize: 22.0,color:Color(0xFF3A65D0))
+                                    style: TextStyle(fontSize: 22.0,color:Color(0xFF3A65D0))
 
-                              ),
+                                ),
 
-                            ), )
+                              ), )
 
-                      ),
-                      TimeInHourAndMinute(),
-                      Spacer(),
-                      Clock(),
-                      Spacer(),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              left: 20.0, right: 20.0, top: 0.0, bottom: 0.0),
+                        ),
+                        TimeInHourAndMinute(),
+                        Spacer(),
+                        Clock(),
+                        Spacer(),
+                        Container(
+                            margin: const EdgeInsets.only(
+                                left: 20.0, right: 20.0, top: 0.0, bottom: 0.0),
 
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                width: 30,
-                                height: 30,
-                                color: /*Color(0xff9c27b0)*/distanceInMeters <
-                                    double.parse(data.Distination) ? Color(
-                                    0xFF2C582C) : Color(0xFFC63535),
-                                child: Center(
-                                  child: Text(
-                                    data.Distination,
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(fontWeight: FontWeight.bold,
-                                        color: Color(0xFFFAFAFA),
-                                        fontSize: 19),
-                                  ),),),
-                              Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  width: 30,
+                                  height: 30,
+                                  color: /*Color(0xff9c27b0)*/distanceInMeters <
+                                      double.parse(data.Distination) ? Color(
+                                      0xFF2C582C) : Color(0xFFC63535),
+                                  child: Center(
+                                    child: Text(
+                                      data.Distination,
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(fontWeight: FontWeight.bold,
+                                          color: Color(0xFFFAFAFA),
+                                          fontSize: 19),
+                                    ),),),
+                                Expanded(
 
-                                child: Align(
-                                      alignment: Alignment.topRight,
+                                  child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: Text(
+                                           LanguageProvider.getTexts('distancesafe').toString(),
+                                          textDirection: TextDirection.ltr,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 19,),
+                                        )),)
+                              ],
+                            )
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(
+                                left: 20.0, right: 20.0, top: 1.0, bottom: 0.0),
+
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  width: 30,
+                                  height: 30,
+                                  color: double.parse(data.Distination)>=distanceInMeters ? Color(
+                                      0xFF2C582C) : Color(0xFFC63535),
+                                  child: Center(
+                                    child: Text(
+
+
+
+                                    disttocpmpany,
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(fontWeight: FontWeight.bold,
+                                          color: Color(0xFFFAFAFA),
+                                          fontSize: 19),
+                                    ),),),
+                                Expanded(
+                                  child: Align(
+                                      alignment: Alignment.centerRight,
                                       child: Text(
-                                         LanguageProvider.getTexts('distancesafe').toString(),
+                                        LanguageProvider.getTexts('distancedang').toString(),
                                         textDirection: TextDirection.ltr,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 19,),
                                       )),)
-                            ],
-                          )
-                      ),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              left: 20.0, right: 20.0, top: 1.0, bottom: 0.0),
-
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                width: 30,
-                                height: 30,
-                                color: double.parse(data.Distination)>=distanceInMeters ? Color(
-                                    0xFF2C582C) : Color(0xFFC63535),
-                                child: Center(
-                                  child: Text(
-
-
-
-                                  disttocpmpany,
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(fontWeight: FontWeight.bold,
-                                        color: Color(0xFFFAFAFA),
-                                        fontSize: 19),
-                                  ),),),
-                              Expanded(
-                                child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      LanguageProvider.getTexts('distancedang').toString(),
-                                      textDirection: TextDirection.ltr,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 19,),
-                                    )),)
-                            ],
-                          )
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            left: 20.0, right: 20.0, bottom: 10.0, top: 10),
-
-                        child: Consumer<MyThemeModel>(
-                          builder: (context, theme, child) =>
-                              GestureDetector(
-                                child: GestureDetector(
-                                  onTap: () {
-
-          setState(() {
-            check(Globalvireable.type);
-            });
-
-            },
-                                  child: Image.asset(
-
-                                    "assest/print.png",
-                                    alignment: Alignment.center,
-                                    height: 150,
-                                    width: 150,
-                                  //  color:Color(0xFF3A65D0),
-                                   /* distanceInMeters <= double.parse(data.Distination) ? Color(
-                                        0xFF2C582C) : Color(0xFFC63535),*/
-
-                                  ),),
-                              ),
+                              ],
+                            )
                         ),
-                      ),
-                    ],
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 20.0, right: 20.0, bottom: 10.0, top: 10),
+
+                          child: Consumer<MyThemeModel>(
+                            builder: (context, theme, child) =>
+                                GestureDetector(
+                                  child: GestureDetector(
+                                    onTap: () {
+
+            setState(() {
+              check(Globalvireable.type);
+              });
+
+              },
+                                    child: Image.asset(
+
+                                      "assest/print.png",
+                                      alignment: Alignment.center,
+                                      height: 150,
+                                      width: 150,
+                                    //  color:Color(0xFF3A65D0),
+                                     /* distanceInMeters <= double.parse(data.Distination) ? Color(
+                                          0xFF2C582C) : Color(0xFFC63535),*/
+
+                                    ),),
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             }
-          }
-      ),
-    ),);
+        ),
+      ),),
+    );
   }
 
 

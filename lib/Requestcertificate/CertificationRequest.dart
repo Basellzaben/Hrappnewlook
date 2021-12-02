@@ -63,150 +63,50 @@ class _CertificationRequest extends State<CertificationRequest> {
   Widget build(BuildContext context) {
     goBackToPreviousScreen(BuildContext context) {
       Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Index_Main()),);
     }
 
     getdate();
 
-    return Scaffold(
-        appBar: AppBar(title: Text(
-          LanguageProvider.getTexts('Requestcertificate').toString(),
-          /*   textDirection: TextDirection.ltr*/),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Index_Main()),),
+    Future<bool> _onWillPop() async {
+      //Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Index_Main()),).whenComplete(() =>   Navigator.pop(context));
+
+      return true;
+
+
+    }
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+          appBar: AppBar(title: Text(
+            LanguageProvider.getTexts('Requestcertificate').toString(),
+            /*   textDirection: TextDirection.ltr*/),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Index_Main()),),
+            ),
+            // goBackToPreviousScreen();
           ),
-          // goBackToPreviousScreen();
-        ),
-        // appBar: AppBar(title: Text("")),
-        body:Directionality(
-            textDirection: LanguageProvider.getDirection(),
-            child: SingleChildScrollView(
+          // appBar: AppBar(title: Text("")),
+          body:Directionality(
+              textDirection: LanguageProvider.getDirection(),
+              child: SingleChildScrollView(
 
-              //   padding: EdgeInsets.all(30.0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
+                //   padding: EdgeInsets.all(30.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
 
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, left: 5, right: 5),
-                        height: 100,
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(color: Colors.deepPurpleAccent, width: 1.5),
-                                borderRadius: BorderRadius.circular(15)),
-                            elevation: 4.0,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-
-                                  Align(
-                                    child: Container(
-                                        alignment: LanguageProvider.Align(),
-                                        margin: const EdgeInsets.all(5),
-                                        //  alignment: Alignment.center,
-                                        child: Row(
-                                            children: [
-                                              /* Text(
-
-                    LanguageProvider.getTexts('Name').toString(),
-                     textDirection: LanguageProvider.getDirection(),
-                    style: new TextStyle(
-                      fontSize: 15.0, //#e7e7df
-                      color:Colors.black54,
-                    ),
-                  ),
-
-*/              Row(
-                                                  children: <Widget>[
-                                                    Icon(Icons.account_circle_rounded,color:Colors.black54 ),
-                                                    Text(
-                                                      "",
-                                                      textDirection: LanguageProvider.getDirection(),
-                                                      style: new TextStyle(
-                                                        fontSize: 15.0, //#e7e7df
-                                                        color:Colors.black54,
-                                                      ),
-                                                    ),
-                                                  ]
-                                              ),
-                                              Text(
-                                                Globalvireable.name,
-                                                textDirection: LanguageProvider.getDirection(),
-
-                                                style: new TextStyle(
-                                                  fontSize: 15.0, //#e7e7df
-                                                  color:Colors.black87,
-                                                ),
-                                              )
-
-
-
-
-                                            ])
-                                    ),),
-
-                                  Align(
-                                    child: Container(
-                                        alignment: LanguageProvider.Align(),
-
-                                        margin: const EdgeInsets.only(top: 18, left: 5, right: 5),
-
-                                        //  alignment: Alignment.center,
-                                        child: Row(
-                                            children: [
-                                              /* Text(
-
-                    LanguageProvider.getTexts('Name').toString(),
-                     textDirection: LanguageProvider.getDirection(),
-                    style: new TextStyle(
-                      fontSize: 15.0, //#e7e7df
-                      color:Colors.black54,
-                    ),
-                  ),
-
-*/              Row(
-                                                  children: <Widget>[
-                                                    Icon(Icons.date_range,color:Colors.black54 ),
-                                                    Text(
-                                                      "",
-                                                      textDirection: LanguageProvider.getDirection(),
-                                                      style: new TextStyle(
-                                                        fontSize: 15.0, //#e7e7df
-                                                        color:Colors.black54,
-                                                      ),
-                                                    ),
-                                                  ]
-                                              ),
-                                              Text(
-                                                date,
-                                                textDirection: LanguageProvider.getDirection(),
-
-                                                style: new TextStyle(
-                                                  fontSize: 15.0, //#e7e7df
-                                                  color:Colors.black87,
-                                                ),
-                                              )
-
-
-
-
-                                            ])
-
-                                    ),),
-
-
-
-
-
-
-
-                                ])),
-                      ),
-
-                      Container(
-                          margin: const EdgeInsets.only(top: 10, left: 5, right: 5,bottom: 20),
+                        Container(
+                          margin: const EdgeInsets.only(top: 10, left: 5, right: 5),
+                          height: 100,
                           child: Card(
                               shape: RoundedRectangleBorder(
                                   side: BorderSide(color: Colors.deepPurpleAccent, width: 1.5),
@@ -217,247 +117,363 @@ class _CertificationRequest extends State<CertificationRequest> {
                                   children: <Widget>[
 
                                     Align(
-                                        child: Container(
-                                            margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
-                                            //  alignment: Alignment.center,
-                                            child: TextField(
+                                      child: Container(
+                                          alignment: LanguageProvider.Align(),
+                                          margin: const EdgeInsets.all(5),
+                                          //  alignment: Alignment.center,
+                                          child: Row(
+                                              children: [
+                                                /* Text(
 
-                                              decoration: InputDecoration(
-                                                prefixIcon: Icon(Icons.format_align_justify),
-                                                border: OutlineInputBorder(),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: hexToColor("#415440"), width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
+                      LanguageProvider.getTexts('Name').toString(),
+                       textDirection: LanguageProvider.getDirection(),
+                      style: new TextStyle(
+                        fontSize: 15.0, //#e7e7df
+                        color:Colors.black54,
+                      ),
+                    ),
+
+*/              Row(
+                                                    children: <Widget>[
+                                                      Icon(Icons.account_circle_rounded,color:Colors.black54 ),
+                                                      Text(
+                                                        "",
+                                                        textDirection: LanguageProvider.getDirection(),
+                                                        style: new TextStyle(
+                                                          fontSize: 15.0, //#e7e7df
+                                                          color:Colors.black54,
+                                                        ),
+                                                      ),
+                                                    ]
                                                 ),
-                                                enabledBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.black, width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
+                                                Text(
+                                                  Globalvireable.name,
+                                                  textDirection: LanguageProvider.getDirection(),
 
-                                                ),
-
-
-                                                contentPadding: EdgeInsets.only(
-                                                    top: 18, bottom: 18, right: 20, left: 20),
-                                                fillColor: Colors.white,
-                                                filled: true,
-                                                hintText: LanguageProvider.getTexts('certificationtype').toString(),
-
-                                              ),
-                                            )
+                                                  style: new TextStyle(
+                                                    fontSize: 15.0, //#e7e7df
+                                                    color:Colors.black87,
+                                                  ),
+                                                )
 
 
 
 
-                                        )),
-
-
-
-
-
-                                    Align(
-                                        child: Container(
-                                            margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
-                                            //  alignment: Alignment.center,
-                                            child: TextField(
-
-                                              decoration: InputDecoration(
-                                                prefixIcon: Icon(Icons.format_align_justify),
-                                                border: OutlineInputBorder(),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: hexToColor("#415440"), width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.black, width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
-
-                                                ),
-
-
-                                                contentPadding: EdgeInsets.only(
-                                                    top: 18, bottom: 18, right: 20, left: 20),
-                                                fillColor: Colors.white,
-                                                filled: true,
-                                                hintText: LanguageProvider.getTexts('Certificatestatement').toString(),
-
-                                              ),
-                                            )
-
-
-
-
-                                        )),
-
-
-                                    Align(
-
-                                        child: Container(
-                                            margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
-                                            //  alignment: Alignment.center,
-                                            child: TextField(
-
-                                              decoration: InputDecoration(
-                                                prefixIcon: Icon(Icons.send),
-                                                border: OutlineInputBorder(),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: hexToColor("#415440"), width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.black, width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
-
-                                                ),
-
-
-                                                contentPadding: EdgeInsets.only(
-                                                    top: 18, bottom: 18, right: 20, left: 20),
-                                                fillColor: Colors.white,
-                                                filled: true,
-                                                hintText: LanguageProvider.getTexts('to').toString(),
-
-                                              ),
-                                            )
-
-
-
-
-                                        )),
-
-
-                                    Align(
-
-                                        child: Container(
-
-                                            margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
-                                            //  alignment: Alignment.center,
-
-                                            child: TextField(
-
-                                              keyboardType: TextInputType.multiline,
-                                              decoration: InputDecoration(
-                                                prefixIcon: Icon(Icons.message_outlined),
-                                                border: OutlineInputBorder(),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: hexToColor("#415440"), width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.black, width: 0.0),
-                                                    borderRadius: BorderRadius.circular(10.0)
-
-                                                ),
-
-
-                                                contentPadding: EdgeInsets.only(
-                                                    top: 70, bottom: 18, right: 20, left: 20),
-                                                fillColor: Colors.white,
-                                                filled: true,
-
-                                                hintText: LanguageProvider.getTexts('thereasons').toString(),
-                                              ),
-
-                                            )
-
-
-
-
-                                        )),
-
-
+                                              ])
+                                      ),),
 
                                     Align(
                                       child: Container(
+                                          alignment: LanguageProvider.Align(),
 
-                                        margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
-                                        alignment: Alignment.center,
+                                          margin: const EdgeInsets.only(top: 18, left: 5, right: 5),
 
-                                        child: Column(
+                                          //  alignment: Alignment.center,
+                                          child: Row(
+                                              children: [
+                                                /* Text(
 
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            ElevatedButton(
+                      LanguageProvider.getTexts('Name').toString(),
+                       textDirection: LanguageProvider.getDirection(),
+                      style: new TextStyle(
+                        fontSize: 15.0, //#e7e7df
+                        color:Colors.black54,
+                      ),
+                    ),
 
-                                              child: Text(LanguageProvider.getTexts('documents').toString()),
-                                              onPressed:
-                                                  () async {
-                                                var imgFile = await ImagePicker.pickImage(
-                                                    source: ImageSource.gallery
-
-                                                );
-                                                setState((){
-                                                  // /100dp  imgs.add(Image.file(imgFile));
-                                                  imgs.add(Image.file(imgFile));
-                                                });
-                                              },
-                                            ),
-                                            Container(
-                                                height: 100,
-                                                child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  scrollDirection: Axis.horizontal,
-                                                  itemCount: imgs.length,
-
-
-                                                  itemBuilder: (context, i) =>
-                                                      Column(
-                                                          children: [
-
-                                                            Container(
-                                                              width: 100,
-                                                              height: 100,
-                                                              child: imgs[i],
-                                                            )
-                                                            //  Divider()
-                                                          ]
+*/              Row(
+                                                    children: <Widget>[
+                                                      Icon(Icons.date_range,color:Colors.black54 ),
+                                                      Text(
+                                                        "",
+                                                        textDirection: LanguageProvider.getDirection(),
+                                                        style: new TextStyle(
+                                                          fontSize: 15.0, //#e7e7df
+                                                          color:Colors.black54,
+                                                        ),
                                                       ),
-                                                )),
+                                                    ]
+                                                ),
+                                                Text(
+                                                  date,
+                                                  textDirection: LanguageProvider.getDirection(),
 
-                                          ],
+                                                  style: new TextStyle(
+                                                    fontSize: 15.0, //#e7e7df
+                                                    color:Colors.black87,
+                                                  ),
+                                                )
+
+
+
+
+                                              ])
+
+                                      ),),
+
+
+
+
+
+
+
+                                  ])),
+                        ),
+
+                        Container(
+                            margin: const EdgeInsets.only(top: 10, left: 5, right: 5,bottom: 20),
+                            child: Card(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.deepPurpleAccent, width: 1.5),
+                                    borderRadius: BorderRadius.circular(15)),
+                                elevation: 4.0,
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+
+                                      Align(
+                                          child: Container(
+                                              margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
+                                              //  alignment: Alignment.center,
+                                              child: TextField(
+
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.format_align_justify),
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: hexToColor("#415440"), width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors.black, width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+
+                                                  ),
+
+
+                                                  contentPadding: EdgeInsets.only(
+                                                      top: 18, bottom: 18, right: 20, left: 20),
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  hintText: LanguageProvider.getTexts('certificationtype').toString(),
+
+                                                ),
+                                              )
+
+
+
+
+                                          )),
+
+
+
+
+
+                                      Align(
+                                          child: Container(
+                                              margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
+                                              //  alignment: Alignment.center,
+                                              child: TextField(
+
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.format_align_justify),
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: hexToColor("#415440"), width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors.black, width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+
+                                                  ),
+
+
+                                                  contentPadding: EdgeInsets.only(
+                                                      top: 18, bottom: 18, right: 20, left: 20),
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  hintText: LanguageProvider.getTexts('Certificatestatement').toString(),
+
+                                                ),
+                                              )
+
+
+
+
+                                          )),
+
+
+                                      Align(
+
+                                          child: Container(
+                                              margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
+                                              //  alignment: Alignment.center,
+                                              child: TextField(
+
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.send),
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: hexToColor("#415440"), width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors.black, width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+
+                                                  ),
+
+
+                                                  contentPadding: EdgeInsets.only(
+                                                      top: 18, bottom: 18, right: 20, left: 20),
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  hintText: LanguageProvider.getTexts('to').toString(),
+
+                                                ),
+                                              )
+
+
+
+
+                                          )),
+
+
+                                      Align(
+
+                                          child: Container(
+
+                                              margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
+                                              //  alignment: Alignment.center,
+
+                                              child: TextField(
+
+                                                keyboardType: TextInputType.multiline,
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.message_outlined),
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: hexToColor("#415440"), width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors.black, width: 0.0),
+                                                      borderRadius: BorderRadius.circular(10.0)
+
+                                                  ),
+
+
+                                                  contentPadding: EdgeInsets.only(
+                                                      top: 70, bottom: 18, right: 20, left: 20),
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+
+                                                  hintText: LanguageProvider.getTexts('thereasons').toString(),
+                                                ),
+
+                                              )
+
+
+
+
+                                          )),
+
+
+
+                                      Align(
+                                        child: Container(
+
+                                          margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
+                                          alignment: Alignment.center,
+
+                                          child: Column(
+
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              ElevatedButton(
+
+                                                child: Text(LanguageProvider.getTexts('documents').toString()),
+                                                onPressed:
+                                                    () async {
+                                                  var imgFile = await ImagePicker.pickImage(
+                                                      source: ImageSource.gallery
+
+                                                  );
+                                                  setState((){
+                                                    // /100dp  imgs.add(Image.file(imgFile));
+                                                    imgs.add(Image.file(imgFile));
+                                                  });
+                                                },
+                                              ),
+                                              Container(
+                                                  height: 100,
+                                                  child: ListView.builder(
+                                                    shrinkWrap: true,
+                                                    scrollDirection: Axis.horizontal,
+                                                    itemCount: imgs.length,
+
+
+                                                    itemBuilder: (context, i) =>
+                                                        Column(
+                                                            children: [
+
+                                                              Container(
+                                                                width: 100,
+                                                                height: 100,
+                                                                child: imgs[i],
+                                                              )
+                                                              //  Divider()
+                                                            ]
+                                                        ),
+                                                  )),
+
+                                            ],
+                                          ),
                                         ),
+
                                       ),
 
-                                    ),
 
 
 
 
-
-                                    Container(
-                                        margin: const EdgeInsets.only(left: 50.0,right: 50.0,top: 50.0,bottom: 20.0),
-                                        color: Colors.transparent,
-                                        //      color: Colors.deepPurple,
-                                        width: 300,
-                                        height:50,
-                                        child: ElevatedButton(
-
-
-                                          onPressed: () {  },
-                                          child: Text(LanguageProvider.getTexts('Order').toString()),
-                                        )
-                                    ),
-
-                                  ])
-
-                          )),
+                                      Container(
+                                          margin: const EdgeInsets.only(left: 50.0,right: 50.0,top: 50.0,bottom: 20.0),
+                                          color: Colors.transparent,
+                                          //      color: Colors.deepPurple,
+                                          width: 300,
+                                          height:50,
+                                          child: ElevatedButton(
 
 
+                                            onPressed: () {  },
+                                            child: Text(LanguageProvider.getTexts('Order').toString()),
+                                          )
+                                      ),
 
+                                    ])
+
+                            )),
 
 
 
 
 
 
-                    ]))));
+
+
+
+                      ])))),
+    );
 
 
 

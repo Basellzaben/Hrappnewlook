@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hrmsapp/Index_Page/Index_Main.dart';
 
 import '../homePage.dart';
 import 'body_Leave_Screen.dart';
@@ -13,6 +14,11 @@ class mainLeaveScreen extends StatefulWidget {
 }
 goBackToPreviousScreen(BuildContext context) {
 //  Navigator.pop(context);
+
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Index_Main()),);
 }
 
 class _MyAppState extends State<mainLeaveScreen> {

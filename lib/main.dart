@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:io' show Platform;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hrmsapp/Index_Page/Index_Body.dart';
 import 'package:hrmsapp/LanguageProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,9 +43,9 @@ String out="";
     if(prefer.getString('LOGIN')=="1"){
       print('login yess');
 
-      Globalvireable.id= prefer.getString('LOGINU').toString();
+     // Globalvireable.id= prefer.getString('LOGINU').toString();
       prefer.getString('LOGINP');
-    Globalvireable.id= prefer.getString('LOGINU').toString();
+   // Globalvireable.id= prefer.getString('LOGINU').toString();
 
      Navigator.push(context, MaterialPageRoute(builder: (context) => Index_Main()));
 
@@ -51,7 +53,7 @@ String out="";
   }
   @override
   Widget build(BuildContext context) {
-    Remember();
+ //   Remember();
     return MaterialApp(
       home: SplashScreenPage(),
       debugShowCheckedModeBanner: false,
@@ -127,73 +129,75 @@ String logo="";
               ),
             width: MediaQuery.of(context).size.height,
             height: MediaQuery.of(context).size.height,
-              child: Column(children: [
+             
+              child: SingleChildScrollView(
+                child: Column(children: [
 
-              Card(
+                Card(
 
-                shape: RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder(
 
-                  borderRadius:BorderRadius.circular(25), // if you need this
-                  side: BorderSide(
-                    width:MediaQuery.of(context).size.height,
-                  //  color: Colors.black12.withOpacity(0.1),
+                    borderRadius:BorderRadius.circular(25), // if you need this
+                    side: BorderSide(
+                      width:MediaQuery.of(context).size.height,
+                    //  color: Colors.black12.withOpacity(0.1),
 
+                    ),
                   ),
-                ),
-                  margin: const EdgeInsets.only(left: 15.0,right: 15.0,top: 120.0,bottom: 0.0),
-                      child: Column(children: [
+                    margin: const EdgeInsets.only(left: 15.0,right: 15.0,top: 120.0,bottom: 0.0),
+                        child: Column(children: [
 
-                        Container(
-                            color: Colors.transparent,
-                           margin: const EdgeInsets.only(left:
-                           .0,right: 10.0,top: 30.0,bottom: 15.0),
+                          Container(
+                              color: Colors.transparent,
+                             margin: const EdgeInsets.only(left:
+                             .0,right: 10.0,top: 30.0,bottom: 15.0),
+                              width: MediaQuery.of(context).size.height,
+                                  child: Image.file(File(Globalvireable.logo), width: 400.0, height: 100.0)
+                          ),
+                   Container(
+                     margin: const EdgeInsets.only(left: 20.0,right: 20.0,top: 30.0,bottom: 0.0),
+                     color: Colors.transparent,
+                           // color: Colors.white,
                             width: MediaQuery.of(context).size.height,
-                                child: Image.file(File(Globalvireable.logo), width: 400.0, height: 100.0)
-                        ),
-                 Container(
-                   margin: const EdgeInsets.only(left: 20.0,right: 20.0,top: 30.0,bottom: 0.0),
-                   color: Colors.transparent,
-                         // color: Colors.white,
-                          width: MediaQuery.of(context).size.height,
-                          // height: MediaQuery.of(context).size.height,
+                            // height: MediaQuery.of(context).size.height,
 
-                          child: TextFormField(
+                            child: TextFormField(
 textAlign: LanguageProvider.TxtAlign(),
-                              controller:usenameE,
-                            decoration: InputDecoration(
+                                controller:usenameE,
+                              decoration: InputDecoration(
 
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                                  borderSide: BorderSide(color: Colors.deepPurple, width: 2),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: Colors.deepPurple),
-                                ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                    borderSide: BorderSide(color: Colors.deepPurple, width: 2),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: BorderSide(color: Colors.deepPurple),
+                                  ),
 
-                                border: UnderlineInputBorder(),
-                                labelText: LanguageProvider.getTexts('username').toString()
+                                  border: UnderlineInputBorder(),
+                                  labelText: LanguageProvider.getTexts('username').toString()
 
-                                ,labelStyle:  TextStyle(
+                                  ,labelStyle:  TextStyle(
 
       color:Colors.black87,
       )
+                              ),
                             ),
+
                           ),
 
-                        ),
+                  Container(
+                          color: Colors.transparent,
+                    margin: const EdgeInsets.only(left: 20.0,right: 20.0,top: 40.0,bottom: 12.0),
 
-                Container(
-                        color: Colors.transparent,
-                  margin: const EdgeInsets.only(left: 20.0,right: 20.0,top: 40.0,bottom: 12.0),
-
-                //  color: Colors.white,
-                  width: MediaQuery.of(context).size.height,
-                 // height: MediaQuery.of(context).size.height,
-                    child: TextFormField(
-                      textAlign: LanguageProvider.TxtAlign(),
-                      controller:passwordE,
-                      obscureText: _isObscure,
+                  //  color: Colors.white,
+                    width: MediaQuery.of(context).size.height,
+                   // height: MediaQuery.of(context).size.height,
+                      child: TextFormField(
+                        textAlign: LanguageProvider.TxtAlign(),
+                        controller:passwordE,
+                        obscureText: _isObscure,
       decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -223,41 +227,41 @@ textAlign: LanguageProvider.TxtAlign(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Checkbox(
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  value: rememberme,
-                  checkColor: Colors.white,
+                Checkbox(
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    value: rememberme,
+                    checkColor: Colors.white,
 
-                  onChanged:(bool? value) {
-                    setState(() {
-                   //   trans();
-                      //_valueCheck = value;
-                    rememberme=value!; });
-                    },
-                  activeColor: Theme.of(context).primaryColor),
+                    onChanged:(bool? value) {
+                      setState(() {
+                     //   trans();
+                        //_valueCheck = value;
+                      rememberme=value!; });
+                      },
+                    activeColor: Theme.of(context).primaryColor),
              //Text("تذكر معلومات الدخول")
             //  Text(lan.getTexts('login').toString())
-              Text(LanguageProvider.getTexts('savelogindetails').toString())
+                Text(LanguageProvider.getTexts('savelogindetails').toString())
             ],
           ),
         ),
 
-                ])
-              ),
+                  ])
+                ),
 
-                Container(
-                    margin: const EdgeInsets.only(left: 20.0,right: 20.0,top: 50.0,bottom: 20.0),
-                    color: Colors.transparent,
-              //      color: Colors.deepPurple,
-                    width: MediaQuery.of(context).size.height,
-                     height:60,
-                    child: ElevatedButton(
+                  Container(
+                      margin: const EdgeInsets.only(left: 20.0,right: 20.0,top: 50.0,bottom: 20.0),
+                      color: Colors.transparent,
+                //      color: Colors.deepPurple,
+                      width: MediaQuery.of(context).size.height,
+                       height:60,
+                      child: ElevatedButton(
 
-                      onPressed: () async {
+                        onPressed: () async {
       try{
         prefer = await SharedPreferences.getInstance();
         prefer.setString('usenameinfo', usenameE.text);
-        Globalvireable.id=usenameE.text;
+        //Globalvireable.id=usenameE.text;
 /*
         if(prefer.getString('LOGIN')=='1'){
           print('login yess');
@@ -270,45 +274,45 @@ textAlign: LanguageProvider.TxtAlign(),
          //      }
 
 
-                        /*  prefer.setString('LOGIN',"1");
-                          prefer.setString('LOGINU',usenameE.text);
-                          prefer.setString('LOGINP',passwordE.text);
+                          /*  prefer.setString('LOGIN',"1");
+                            prefer.setString('LOGINU',usenameE.text);
+                            prefer.setString('LOGINP',passwordE.text);
 */
-                          if(rememberme)
-                          {
-                            prefer.setString('usenameE', usenameE.text);
-                            prefer.setString('passwordE', passwordE.text);
+                            if(rememberme)
+                            {
+                              prefer.setString('usenameE', usenameE.text);
+                              prefer.setString('passwordE', passwordE.text);
 
-                          }else{
-                            prefer.setString('', usenameE.text);
-                            prefer.setString('', passwordE.text);
+                            }else{
+                              prefer.setString('', usenameE.text);
+                              prefer.setString('', passwordE.text);
 
+                            }
+
+
+                          }on Exception catch (_) {
+                           /* ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("يوجد مشكلة , يرجى المحاولة لاحقا"),
+                            ));
+*/
                           }
 
-
-                        }on Exception catch (_) {
-                         /* ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("يوجد مشكلة , يرجى المحاولة لاحقا"),
-                          ));
-*/
-                        }
-
-                      },
-                      child: Text(LanguageProvider.getTexts('login').toString()),
-                    )
-                ),
+                        },
+                        child: Text(LanguageProvider.getTexts('login').toString()),
+                      )
+                  ),
 
 
 
-                Container(
-                    alignment: Alignment.bottomCenter,
-                    width:180, //MediaQuery.of(context).size.height,
-                    height:12, //MediaQuery.of(context).size.height,
-                  // margin: const EdgeInsets.only(left: 12.0,right: 12.0,top: 5.0,bottom: 0.0),
-               //     color: Colors.black38,
-                    child: Align(
-
+                  Container(
                       alignment: Alignment.bottomCenter,
+                      width:180, //MediaQuery.of(context).size.height,
+                      height:12, //MediaQuery.of(context).size.height,
+                    // margin: const EdgeInsets.only(left: 12.0,right: 12.0,top: 5.0,bottom: 0.0),
+                 //     color: Colors.black38,
+                      child: Align(
+
+                        alignment: Alignment.bottomCenter,
   //
 
       child: GestureDetector(
@@ -326,11 +330,12 @@ print("ff");
       ),
       ),
 
-                     )
+                       )
 
-                ),
+                  ),
 
-              ])
+                ]),
+              )
        // This trailing comma makes auto-formatting nicer for build methods.
           ), ),
     );
@@ -366,13 +371,13 @@ print("ff");
       usenameE.text=userid!;
       passwordE.text=password!;
 
-    if(prefer.getString('LOGIN')=='1')
+    /*if(prefer.getString('LOGIN')=='1')
     {
       Globalvireable.id= prefer.getString('LOGINU').toString();
       print('login yess');
      // Navigator.of(context).pop();
       Navigator.push(context, MaterialPageRoute(builder: (context) => Index_Main()));
-    }
+    }*/
 
 
   }
@@ -386,12 +391,18 @@ print("ff");
 
 
 
-
+  void logddout() async{
+    SharedPreferences  prefer = await SharedPreferences.getInstance() ;
+    prefer.setString('LOGIN',"0");
+    Globalvireable.id="0";
+  }
 
  signIn_post(String id ,String password) async {
-
+   logddout();
+   Globalvireable.id=id;
+   Index_Body.idf=id;
    _scaffoldKey.currentState!.showSnackBar(
-       new SnackBar(duration: new Duration(seconds: 10), content:
+       new SnackBar(duration: new Duration(seconds: 20), content:
        new
          Row(
          children: <Widget>[
@@ -405,12 +416,16 @@ print("ff");
     Uri apiUrl = Uri.parse(Globalvireable.loginapi);
 
     final json = {
-      "User_ID": id,
+      "Login_Name": id,
       "User_Password": password};
+   http.Response response=await http.post(apiUrl, body: json);
+try {
+   response = await http.post(apiUrl, body: json).timeout(
+      const Duration (seconds: 20), onTimeout: () => _onTimeout());
+}on TimeoutException catch (_) {
+  _onTimeout();
 
-
-    http.Response response = await http.post(apiUrl, body: json);
-
+}
     var jsonResponse = jsonDecode(response.body);
 
 
@@ -427,22 +442,55 @@ print("ff");
 
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       c=1;
+      Globalvireable.id=id;
       Navigator.of(context).pop();
       Navigator.push(context, MaterialPageRoute(builder: (context) => Index_Main() /*homePage()*/),);
 
 
     }
     else {
+      Timer(Duration(seconds: 8),
+              ()
+          {
+            Fluttertoast.showToast(
+
+                msg: "رقم الموظف او كلمة المرور خطأ",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1
+
+            );
+          });
+    /*  Fluttertoast.showToast(
+          msg: "رقم الموظف او كلمة المرور خطأ",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1
+      );*/
+
     /*  setState(() {
       });*/
      // try{
-   ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  /* ScaffoldMessenger.of(context).hideCurrentSnackBar();
    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
    content: Text("يوجد مشكلة , يرجى المحاولة لاحقا"),
-   ));
+   ));*/
     }
 
  }
+
+  _onTimeout() {
+    Timer(Duration(seconds: 8),
+    ()
+    {
+      Fluttertoast.showToast(
+          msg: "لا يجد اتصال بالانترنت",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1
+      );
+    });
+  }
 
  }
 
@@ -542,5 +590,5 @@ class SplashScreenPage extends StatelessWidget {
   }*/
 
 
-  
+
 }

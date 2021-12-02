@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hrmsapp/FingerPrint/HomeView.dart';
 import 'package:hrmsapp/FingerPrint/LocationService.dart';
 import 'package:hrmsapp/FingerPrint/user_location.dart';
+import 'package:hrmsapp/Index_Page/Index_Main.dart';
 
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,10 @@ class HomeScreen extends StatelessWidget {
 
   goBackToPreviousScreen(BuildContext context) {
     Navigator.pop(context);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Index_Main()),);
   }
 
   @override
